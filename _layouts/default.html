@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <title>{{ site.title }}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta property="og:title" content="{{ site.title }}">
+    <meta property="og:description" content="{{ site.description }}">
+    <meta property="og:url" content="{{ site.url }}">
+    <meta property="og:image" content="/img/mustard-mine-logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="icon" href="/img/mustard-mine-logo.png">
+  </head>
+  
+  <body class="{{ page.category | default: "devi" }}-cat">
+    <!-- Navigation. -->
+    <!-- Hamburger menu styling and technique inspired by https://codepen.io/erikterwan/pen/EVzeRP by Erik Terwan and made available under the terms of the MIT license -->
+    <nav>
+      <input type=checkbox>
+      <div id=raptor_button><div></div><div></div><div></div></div>
+      <a class=keep href="/">HOME</a>
+      <div style="flex-grow: 1"></div>
+      {%- for dest in site.nav %}{%- for info in dest -%}
+        {%- if info[1] -%}
+          {%- assign name = info[0] -%}
+          {%- assign url = info[1] -%}
+        {%- else -%}
+          {%- assign name = dest -%}
+          {%- assign url = dest | downcase | replace: " ", "" -%}
+        {%- endif -%}
+        {% assign active = "" %}{% assign current = "" %}
+        {%- if page.title == name %}{% assign active = " active" %}{% assign current = '<span class="screenreader">(current)</span>' %}{% endif %}
+        {%- if info[1].first -%}
+          {%- comment %} It's an array of subpages (eg Characters) {% endcomment %}
+          {%- assign url = name | downcase | replace: " ", "" %}
+          <div class="nav-menucontainer">
+            <a class="nav-dropdown {{active}}" href="{{ url }}" id="dropdown-{{ url }}" role="button" aria-haspopup="true" aria-expanded="false">{{ name }}{{current}}</a>
+            <div class="nav-submenu" aria-labelledby="dropdown-{{ url }}">
+              {%- for subdest in info[1] -%}{%- for subinfo in subdest -%}
+	        {%- if subinfo[1] -%}
+		  {%- assign subname = subinfo[0] -%}
+                  {%- assign suburl = subinfo[1] -%}
+                {%- else -%}
+                  {%- assign subname = subinfo -%}
+                  {%- assign suburl = subinfo | downcase | replace: " ", "" -%}
+                {%- endif -%}
+                <a href="{{ suburl }}">{{ subname }}</a>
+              {%- endfor -%}{%- endfor %}
+            </div>
+          </div>
+        {%- else -%}
+          {%- comment %} It's a single page (maybe with a specified URL) {% endcomment %}
+          <a class="{{active}}" href="{{ url }}">{{ name }}{{ current }}</a>
+        {%- endif %}
+      {%- endfor %}{% endfor %}
+    </nav>
+
+  <main>
+      {{ content }}
+  </main>
+
+<div id=fader></div>
+<div id="popup"><figure><figcaption></figcaption><img src="/img/mustard-mine-logo.png" alt="[placeholder Mustard Mine]" role="presentation"></figure></div>
+
+<footer>
+  <p>
+    <!-- Add other social media links here as needed -->
+    <a href="https://www.twitch.tv/YOURUSERNAME" title="Twitch: YourUserName"><img src="/img/twitchlogo.png" alt="Twitch: YourUserName"></a>
+  </p>
+  <div class="toggle-container">
+    <svg class="sun-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+    <label for="dark-mode-toggle" class="toggle-switch">
+      <input type="checkbox" id="dark-mode-toggle" aria-label="Toggle dark mode">
+      <span class="slider"></span>
+    </label>
+    <svg class="moon-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="2">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+    </svg>
+  </div>
+  <p>&copy; <!-- put your name here --> 2026</p>
+</footer>
+<script src="/js/main.js" type=module></script>
+</body>
+</html>
