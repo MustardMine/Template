@@ -14,4 +14,4 @@ nav:
 # You can rename the file or directory, or even create multiple galleries,
 # by changing this configuration.
 autogallery:
-  - gallery: img
+  gallery: img
