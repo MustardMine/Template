@@ -1,5 +1,8 @@
+# Set the title for your web site, and give a brief description to be shown
+# when people share your site on social media
 title: "FIXME Web Site Title"
 description: " "
+# Your navigation bar at the top carries whichever pages are linked here.
 nav:
   - About: /about
   - Gallery: /gallery
@@ -7,3 +10,8 @@ nav:
     - DeviCat: https://devicat.art/
     - MustardMine: https://mustardmine.com/
     - Wenffyria: https://twitch.tv/wenffyria
+# Automatically update gallery.md when you upload to the img/ directory
+# You can rename the file or directory, or even create multiple galleries,
+# by changing this configuration.
+autogallery:
+  - gallery: img
